@@ -1,7 +1,5 @@
 <?php
 
-// app/Models/Order.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,5 +9,18 @@ class Order extends Model
 {
     use HasFactory;
 
-    // Define any properties or relationships here as needed
+    protected $fillable = ['user_id', 'total'];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class)
+                    ->withPivot('quantity', 'price')
+                    ->withTimestamps();
+    }
+
+    // Optionally, you can add a user relationship
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -39,6 +39,10 @@ Route::middleware('auth')->group(function () {
 
     // Order Routes (Adding orders.index route here)
     Route::resource('orders', OrderController::class);
+
+    // Create order route
+    Route::get('/orders/create', [OrderController::class, 'createOrder'])->name('orders.create');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 });
 
 require __DIR__.'/auth.php';

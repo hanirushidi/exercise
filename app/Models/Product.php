@@ -9,11 +9,12 @@ class Product extends Model
 {
     use HasFactory;
 
-    // Add the fillable property to allow mass assignment for these fields
-    protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'image',
-    ];
+    protected $fillable = ['name', 'description', 'price', 'image'];
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class)
+                    ->withPivot('quantity', 'price')
+                    ->withTimestamps();
+    }
 }

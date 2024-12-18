@@ -18,9 +18,18 @@
                 <ul class="space-y-4">
                     @foreach ($products as $product)
                         <li class="bg-gray-50 hover:bg-gray-100 flex items-center justify-between p-4 transition rounded-lg shadow-sm">
-                            <div>
-                                <strong class="text-lg text-gray-800">{{ $product->name }}</strong>
-                                <p class="text-gray-600">${{ number_format($product->price, 2) }}</p>
+                            <div class="flex items-center space-x-4">
+                                <!-- Display product image -->
+                                @if ($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="object-cover w-16 h-16 rounded-lg">
+                                @else
+                                    <span class="flex items-center justify-center w-16 h-16 text-gray-400 bg-gray-200 rounded-lg">No Image</span>
+                                @endif
+
+                                <div>
+                                    <strong class="text-lg text-gray-800">{{ $product->name }}</strong>
+                                    <p class="text-gray-600">${{ number_format($product->price, 2) }}</p>
+                                </div>
                             </div>
 
                             <div class="flex space-x-4">
